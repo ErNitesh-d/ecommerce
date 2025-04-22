@@ -25,6 +25,8 @@
   "parentId": 1
 }
 
+```
+```json
 **Response Body:**
 {
     "id": 2,
@@ -35,9 +37,7 @@
         "parent": null
     }
 }
-
 ```
-
 ### ➕ Add Top-Level Category
 ```json
 {
@@ -45,6 +45,8 @@
   "parentId": null
 }
 
+```
+```json
 **Response Body:**
 {
     "id": 1,
@@ -61,12 +63,33 @@
 ### ➕ Add Item
 **POST /api/items**  
 **Body:**
+
 ```json
 {
   "name": "I Phone",
   "description": "Ergonomic wireless mouse with long battery life",
   "price": 1299.00,
   "categoryIds": [1,2]
+}
+```
+
+**Response Body:**
+```json
+{
+    "id": 1,
+    "name": "I Phone",
+    "description": "Ergonomic wireless mouse with long battery life",
+    "price": 1299.0,
+    "categories": [
+        {
+            "name": "Electronics",
+            "id": 1
+        },
+        {
+            "name": "Mobile Phones",
+            "id": 2
+        }
+    ]
 }
 ```
 
