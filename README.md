@@ -16,6 +16,24 @@
 
 ## CATEGORIES
 
+### ➕ Add Top-Level Category
+```json
+{
+  "name": "Electronics",
+  "parentId": null
+}
+
+```
+**Response Body:**
+```json
+
+{
+    "id": 1,
+    "name": "Electronics",
+    "parent": null
+}
+```
+
 ### ➕ Add Sub-Category
 **POST /api/categories**  
 **Body:**
@@ -39,25 +57,10 @@
     }
 }
 ```
-### ➕ Add Top-Level Category
-```json
-{
-  "name": "Electronics",
-  "parentId": null
-}
 
-```
-**Response Body:**
-```json
-
-{
-    "id": 1,
-    "name": "Electronics",
-    "parent": null
-}
-```
 
 - `GET /api/categories` – Fetch all categories
+
 
 **Response Body:**
 ```json
@@ -316,18 +319,17 @@
 - `DELETE /api/orders/{orderId}` – Cancel an order.
 
 ---
-
 ## ORDERS
 
-### 1. Create a New Order
+### ➕ Create Order
 **POST /api/orders**  
-**Request Body:**
+**Body:**
 ```json
 {
   "itemIds": [1, 2, 3]
 }
 ```
-**Response:**
+**Response Body:**
 ```json
 {
   "id": 10,
@@ -340,9 +342,38 @@
 }
 ```
 
-### 🔹 2. Get All Orders
-**GET /api/orders**  
-**Response:**
+### ✏️ Update Order
+**PUT /api/orders/{orderId}**  
+**Example:** `/api/orders/10`  
+**Body:**
+```json
+{
+  "itemIds": [3, 4]
+}
+```
+**Response Body:**
+```json
+{
+  "id": 10,
+  "orderDate": "2025-04-22T12:30:00",
+  "totalAmount": 1399.00,
+  "items": [
+    { "id": 3, "name": "MacBook Charger" },
+    { "id": 4, "name": "USB Cable" }
+  ]
+}
+```
+
+### ❌ Delete Order
+**DELETE /api/orders/{orderId}**  
+**Example:** `/api/orders/10`  
+**Response Body:**  
+`204 No Content` (Successful deletion)
+
+### 📦 Fetch Orders
+
+- **GET /api/orders** – All Orders  
+**Response Body:**
 ```json
 [
   {
@@ -357,10 +388,9 @@
 ]
 ```
 
-### 🔹 3. Get Order by ID
-**GET /api/orders/{orderId}**  
+- **GET /api/orders/{orderId}** – By ID  
 **Example:** `/api/orders/10`  
-**Response:**
+**Response Body:**
 ```json
 {
   "id": 10,
@@ -373,36 +403,10 @@
 }
 ```
 
-### 🔹 4. Update Order by ID
-**PUT /api/orders/{orderId}**  
-**Request Body:**
-```json
-{
-  "itemIds": [3, 4]
-}
-```
-**Response:**
-```json
-{
-  "id": 10,
-  "orderDate": "2025-04-22T12:30:00",
-  "totalAmount": 1399.00,
-  "items": [
-    { "id": 3, "name": "MacBook Charger" },
-    { "id": 4, "name": "USB Cable" }
-  ]
-}
-```
-
-### 🔹 5. Delete/Cancel Order by ID
-**DELETE /api/orders/{orderId}**  
-**Response:** `204 No Content` (Successful deletion)
-
 ---
-
 ## 🛒 CART (Optional)
 
-### ➕ Create Cart for a User
+### ➕ Create Cart for User
 **POST /api/carts**  
 **Body:**
 ```json
@@ -410,9 +414,18 @@
   "userId": 1
 }
 ```
+**Response Body:**
+```json
+{
+  "id": 1,
+  "userId": 1,
+  "items": []
+}
+```
 
 ### ➕ Add Item to Cart
-**POST /api/carts/1/items**  
+**POST /api/carts/{cartId}/items**  
+**Example:** `/api/carts/1/items`  
 **Body:**
 ```json
 {
@@ -421,14 +434,54 @@
   "quantity": 2
 }
 ```
+**Response Body:**
+```json
+{
+  "cartId": 1,
+  "userId": 1,
+  "items": [
+    {
+      "itemId": 1,
+      "name": "iPhone",
+      "quantity": 2,
+      "price": 1299.0
+    }
+  ]
+}
+```
 
-### 📋 Get Cart Items
-**GET /api/carts/{cartId}?userId=1**
+### 📋 Fetch Cart Items
+**GET /api/carts/{cartId}?userId=1**  
+**Example:** `/api/carts/1?userId=1`  
+**Response Body:**
+```json
+{
+  "id": 1,
+  "userId": 1,
+  "items": [
+    {
+      "itemId": 1,
+      "name": "iPhone",
+      "quantity": 2,
+      "price": 1299.0
+    }
+  ]
+}
+```
 
 ### ❌ Remove Item from Cart
-**DELETE /api/carts/{cartId}/items/{itemId}?userId=1**
+**DELETE /api/carts/{cartId}/items/{itemId}?userId=1**  
+**Example:** `/api/carts/1/items/1?userId=1`  
+**Response Body:**  
+`204 No Content` (Successful deletion)
 
 ### ✅ Checkout Cart
-**POST /api/carts/{cartId}/checkout?userId=1**
-
----
+**POST /api/carts/{cartId}/checkout?userId=1**  
+**Example:** `/api/carts/1/checkout?userId=1`  
+**Response Body:**
+```json
+{
+  "message": "Checkout successful. Order placed.",
+  "orderId": 12
+}
+```
