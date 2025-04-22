@@ -26,8 +26,9 @@
 }
 
 ```
-```json
 **Response Body:**
+```json
+
 {
     "id": 2,
     "name": "Mobile Phones",
@@ -46,8 +47,9 @@
 }
 
 ```
-```json
 **Response Body:**
+```json
+
 {
     "id": 1,
     "name": "Electronics",
@@ -57,6 +59,31 @@
 
 - `GET /api/categories` – Fetch all categories
 
+**Response Body:**
+```json
+
+[
+    {
+        "id": 1,
+        "name": "Electronics",
+        "parent": null
+    },
+    {
+        "id": 2,
+        "name": "Mobile Phones",
+        "parent": {
+            "id": 1,
+            "name": "Electronics",
+            "parent": null
+        }
+    },
+    {
+        "id": 3,
+        "name": "I Phone",
+        "parent": null
+    }
+]
+```
 
 ## ITEMS
 
@@ -94,26 +121,187 @@
 ```
 
 ### ✏️ Update Item
+
 **PUT /api/items/{itemId}**  
+
+**Example:**
+
+**PUT /api/items/1**  
+
 **Body:**
 ```json
 {
-  "name": "UPDATE Logitech Wireless Mouse",
-  "description": "Ergonomic wireless mouse with long battery life",
-  "price": 1299.00,
-  "categoryIds": [6]
+  "name": "Updated I Phone",
+  "description": "Updated long battery life",
+  "price": 1500.00,
+  "categoryIds": [1]
+}
+```
+
+**Response Body:**
+```json
+{
+    "id": 1,
+    "name": "Updated I Phone",
+    "description": "Updated long battery life",
+    "price": 1500.0,
+    "categories": [
+        {
+            "id": 1,
+            "name": "Electronics",
+            "parent": null
+        }
+    ]
 }
 ```
 
 ### ❌ Delete Item
+
 `DELETE /api/items/{itemId}`
 
+**Example:**
+
+`DELETE /api/items/1`
+
 ### 📦 Fetch Items
+
 - `GET /api/items` – All Items
+
+**Response Body:**
+```json
+[
+    {
+        "id": 1,
+        "name": "I Phone",
+        "description": "Ergonomic wireless mouse with long battery life",
+        "price": 1299.0,
+        "categories": [
+            {
+                "id": 1,
+                "name": "Electronics",
+                "parent": null
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "2 I Phone",
+        "description": "Ergonomic wireless mouse with long battery life",
+        "price": 1299.0,
+        "categories": [
+            {
+                "id": 1,
+                "name": "Electronics",
+                "parent": null
+            }
+        ]
+    }
+]
+```
 - `GET /api/items/{itemId}` – By ID
+
+   **Example:**
+
+- `GET /api/items/2` – By ID
+
+**Response Body:**
+
+```json
+{
+    "id": 2,
+    "name": "2 I Phone",
+    "description": "Ergonomic wireless mouse with long battery life",
+    "price": 1299.0,
+    "categories": [
+        {
+            "id": 1,
+            "name": "Electronics",
+            "parent": null
+        }
+    ]
+}
+```
 - `GET /api/items/category/{categoryName}` – By Category
+
+  **Example:**
+
+- `GET /api/items/category/Electronics` – By Category
+
+**Response Body:**
+```json
+[
+    {
+        "id": 1,
+        "name": "I Phone",
+        "description": "Ergonomic wireless mouse with long battery life",
+        "price": 1299.0,
+        "categories": [
+            {
+                "name": "Electronics",
+                "id": 1
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "2 I Phone",
+        "description": "Ergonomic wireless mouse with long battery life",
+        "price": 1299.0,
+        "categories": [
+            {
+                "name": "Electronics",
+                "id": 1
+            }
+        ]
+    }
+]
+```
+
 - `GET /api/items/name/{itemName}` – By Name
+
+**Example:**
+- `GET /api/items/name/Freeze` – By Name
+  
+ **Response Body:**
+```json
+[
+    {
+        "id": 2,
+        "name": "Freeze",
+        "description": "Ergonomic wireless mouse with long battery life",
+        "price": 15000.0,
+        "categories": [
+            {
+                "name": "Electronics",
+                "id": 1
+            }
+        ]
+    }
+]
+``` 
 - `GET /api/items/price/{price}` – By Price
+
+**Example:**
+  - `GET /api/items/price/15000` – By Price
+
+ **Response Body:**
+```json
+[
+    {
+        "id": 2,
+        "name": "Freeze",
+        "description": "Ergonomic wireless mouse with long battery life",
+        "price": 15000.0,
+        "categories": [
+            {
+                "name": "Electronics",
+                "id": 1
+            }
+        ]
+    }
+]
+
+``` 
 
 ---
 
