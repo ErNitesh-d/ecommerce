@@ -364,12 +364,6 @@
 }
 ```
 
-### ❌ Delete Order
-**DELETE /api/orders/{orderId}**  
-**Example:** `/api/orders/10`  
-**Response Body:**  
-`204 No Content` (Successful deletion)
-
 ### 📦 Fetch Orders
 
 - **GET /api/orders** – All Orders  
@@ -402,6 +396,14 @@
   ]
 }
 ```
+
+
+### ❌ Delete Order
+**DELETE /api/orders/{orderId}**  
+**Example:** `/api/orders/10`  
+**Response Body:**  
+`204 No Content` (Successful deletion)
+
 
 ---
 ## 🛒 CART (Optional)
