@@ -24,6 +24,18 @@
   "name": "Mobile Phones",
   "parentId": 1
 }
+
+**Response Body:**
+{
+    "id": 2,
+    "name": "Mobile Phones",
+    "parent": {
+        "id": 1,
+        "name": "Electronics",
+        "parent": null
+    }
+}
+
 ```
 
 ### ➕ Add Top-Level Category
@@ -31,6 +43,13 @@
 {
   "name": "Electronics",
   "parentId": null
+}
+
+**Response Body:**
+{
+    "id": 1,
+    "name": "Electronics",
+    "parent": null
 }
 ```
 
