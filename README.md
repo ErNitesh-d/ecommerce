@@ -36,17 +36,6 @@
 
 - `GET /api/categories` – Fetch all categories
 
----
-
-### 2. Orders -Task - API Endpoints
-
-- `POST /api/orders` – Create a new order.
-- `GET /api/orders` – Retrieve all orders.
-- `GET /api/orders/{orderId}` – Retrieve a specific order by ID.
-- `PUT /api/orders/{orderId}` – Update an existing order.
-- `DELETE /api/orders/{orderId}` – Cancel an order.
-
----
 
 ## ITEMS
 
@@ -83,6 +72,18 @@
 - `GET /api/items/category/{categoryName}` – By Category
 - `GET /api/items/name/{itemName}` – By Name
 - `GET /api/items/price/{price}` – By Price
+
+---
+
+---
+
+### 2. Orders -Task - API Endpoints
+
+- `POST /api/orders` – Create a new order.
+- `GET /api/orders` – Retrieve all orders.
+- `GET /api/orders/{orderId}` – Retrieve a specific order by ID.
+- `PUT /api/orders/{orderId}` – Update an existing order.
+- `DELETE /api/orders/{orderId}` – Cancel an order.
 
 ---
 
